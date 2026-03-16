@@ -1,23 +1,689 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- JSON-LD Structured Data for SEO (Optimized for Naver/Google Snippets) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "렌트카 가격비교 센터",
+        "url": "https://yourwebsite.com",
+        "description": "2026년 장기렌트카 및 단기렌트카 모델별 가격 비교 플랫폼. 복잡한 렌트카 비용을 분석하여 가장 저렴하고 합리적인 견적을 제시합니다.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Rental Car Price Comparison Expert Team",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://yourwebsite.com/img/logo.webp"
+            }
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://yourwebsite.com/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Google Fonts: Noto Sans KR and Apple SD Gothic Neo for clean typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Bootstrap CSS for modern UI components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS Styling (Modern & Professional Aesthetics) -->
+    <style>
+        /* CSS Reset and Base Styles */
+        body { margin: 0; padding: 0; font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif; background-color: #f8f9fa; color: #333; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        ul, li { list-style: none; padding: 0; margin: 0; }
+        h1, h2, h3, h4 { margin: 0; line-height: 1.4; }
+        img { max-width: 100%; height: auto; display: block; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* Color Palette: Professional, trustworthy, slightly vibrant accent */
+        :root {
+            --primary-color: #007bff; /* Accent color for links and buttons */
+            --secondary-color: #495057; /* Dark text color */
+            --background-light: #ffffff;
+            --background-dark: #f1f3f5;
+            --highlight-color: #2c3e50; /* A dark blue/gray for contrast */
+            --success-color: #28a745; /* Green for checkmarks and success states */
+        }
+
+        /* Header Styling (Clean and Minimalist) */
+        .header { background-color: #ffffff; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); }
+        .header-menu { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .navbar-brand img { height: 40px; }
+        .nav-link { font-size: 1rem; color: var(--secondary-color); font-weight: 500; padding: 10px 15px; transition: color 0.3s; }
+        .nav-link:hover { color: var(--primary-color); }
+
+        /* Hero Section (Main Visual Impact) */
+        .hero-banner { background: url('https://images.pexels.com/photos/170195/pexels-photo-170195.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') no-repeat center center/cover; padding: 100px 0; text-align: center; color: white; position: relative; }
+        .hero-banner::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1; }
+        .hero-content { max-width: 800px; margin: 0 auto; position: relative; z-index: 2; }
+        .hero-content h1 { font-size: 3rem; font-weight: 900; color: #ffffff; margin-bottom: 20px; line-height: 1.3; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .hero-content p { font-size: 1.3rem; color: #f0f0f0; margin-bottom: 30px; }
+        .main-cta-btn { background-color: var(--primary-color); color: white; padding: 16px 32px; border-radius: 8px; font-weight: 700; font-size: 1.2rem; transition: background-color 0.3s, transform 0.3s; border: none; }
+        .main-cta-btn:hover { background-color: #0056b3; transform: translateY(-3px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+
+        /* Content Sections (Information Architecture) */
+        .content-section { padding: 80px 0; background-color: var(--background-light); }
+        .content-section.gray { background-color: var(--background-dark); }
+        .section-title h2 { font-size: 2.5rem; font-weight: 700; color: var(--highlight-color); margin-bottom: 15px; border-left: 6px solid var(--primary-color); padding-left: 20px; }
+        .section-title p { color: #555; font-size: 1.1rem; }
+
+        /* Information Boxes/Cards */
+        .info-card { background-color: white; border-radius: 10px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); padding: 30px; margin-bottom: 25px; border: 1px solid #e9ecef; transition: transform 0.3s, box-shadow 0.3s; }
+        .info-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); }
+        .info-card h3 { font-size: 1.6rem; color: var(--highlight-color); margin-bottom: 15px; position: relative; padding-left: 30px; }
+        .info-card h3::before { content: "✓"; position: absolute; left: 0; top: 0; color: var(--success-color); font-size: 1.4rem; font-weight: 700; }
+        .info-card ul li { padding-left: 25px; position: relative; margin-bottom: 10px; font-size: 1rem; color: #555; }
+        .info-card ul li:before { content: "•"; position: absolute; left: 0; color: var(--primary-color); font-size: 1.1rem; }
+
+        /* Data Visualization (Tables and Graphs) */
+        .data-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95rem; table-layout: fixed; }
+        .data-table th, .data-table td { border: 1px solid #dee2e6; padding: 14px; text-align: left; vertical-align: middle; }
+        .data-table th { background-color: var(--primary-color); color: white; font-weight: 600; text-align: center; }
+        .data-table tr:nth-child(even) { background-color: #f8f9fa; }
+        .data-table .highlight { background-color: #e6f7ff; font-weight: 700; color: var(--primary-color); text-align: center; }
+
+        /* Form Styling (Clean and User-Friendly) */
+        .form-area { background-color: #ffffff; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); }
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--secondary-color); font-size: 1.05rem; }
+        .form-input, .form-select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 1rem; transition: border-color 0.3s; }
+        .form-input:focus, .form-select:focus { border-color: var(--primary-color); box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); outline: none; }
+        .form-submit-btn { background-color: var(--success-color); color: white; padding: 15px 25px; border: none; border-radius: 5px; font-size: 1.1rem; cursor: pointer; transition: background-color 0.3s; width: 100%; font-weight: 600; }
+        .form-submit-btn:hover { background-color: #218838; }
+
+        /* Floating Side Form */
+        .sideForm { position: fixed; right: 0; top: 50%; transform: translateY(-50%); width: 280px; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1); transition: right 0.3s ease; z-index: 1000; }
+        .sideForm.on { right: -280px; }
+        .sideForm-title { font-size: 1.5rem; font-weight: 700; color: var(--highlight-color); margin-bottom: 15px; text-align: center; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; }
+
+        /* Footer Styling (Professional and Informational) */
+        .footer { background-color: var(--highlight-color); color: #c0c0c0; padding: 40px 0; font-size: 0.9rem; border-top: 5px solid var(--primary-color); }
+        .footer .col-lg-3 img { filter: brightness(0) invert(1); opacity: 0.7; }
+        .footer-links a { margin: 0 10px; color: #c0c0c0; transition: color 0.3s; }
+        .footer-links a:hover { color: white; }
+        .footer-info p { margin-bottom: 5px; }
+
+        /* Accordion Styling */
+        .accordion-item { border: 1px solid #dee2e6; margin-bottom: 10px; border-radius: 8px; overflow: hidden; }
+        .accordion-header { background-color: #f8f9fa; border-bottom: none; }
+        .accordion-button { font-size: 1.1rem; font-weight: 600; color: var(--highlight-color); padding: 18px 20px; background-color: transparent; border: none; transition: background-color 0.3s; }
+        .accordion-button:not(.collapsed) { background-color: #e9ecef; color: var(--primary-color); }
+        .accordion-body { padding: 20px; background-color: #ffffff; font-size: 1rem; color: #555; }
+
+        /* Call to Action Bar */
+        .cta-bar { background-color: #f1f3f5; padding: 20px; border-radius: 10px; margin-top: 40px; text-align: center; }
+        .cta-bar a { display: inline-block; padding: 12px 25px; background-color: #e74c3c; color: white; font-weight: bold; border-radius: 5px; margin-top: 10px; transition: background-color 0.3s; }
+        .cta-bar a:hover { background-color: #c0392b; }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-content p { font-size: 1.1rem; }
+            .content-section { padding: 40px 0; }
+            .section-title h2 { font-size: 2rem; }
+            .data-table th, .data-table td { font-size: 0.85rem; padding: 8px; }
+            .sideForm { display: none; } /* Hide side form on mobile for better user experience */
+            .header-menu { flex-direction: column; }
+            .navbar-brand { margin-bottom: 10px; }
+            nav ul { flex-wrap: wrap; justify-content: center; }
+            .nav-link { font-size: 0.9rem; padding: 8px 10px; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Area (Navigation) -->
+    <header class="header">
+        <div class="container header-menu">
+            <a class="navbar-brand" href="/">
+                <!-- Placeholder for Logo -->
+                <img src="https://images.pexels.com/photos/170195/pexels-photo-170195.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="렌트카 가격 비교 센터 로고" style="height: 40px; width: auto; filter: none;">
+            </a>
+            <nav>
+                <ul class="d-flex align-items-center">
+                    <li><a class="nav-link" href="#longterm-rent-info">장기렌트 분석</a></li>
+                    <li><a class="nav-link" href="#model-comparison">모델별 가격비교</a></li>
+                    <li><a class="nav-link" href="#discount-info">할인 및 혜택</a></li>
+                    <li><a class="nav-link" href="#faq-section">자주 묻는 질문</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
     <main>
-      <h1>Home page</h1>
+        <!-- Section 1: Hero Banner (Primary CTA) -->
+        <section class="hero-banner">
+            <div class="container hero-content">
+                <h1 id="mainTitle">2026년 장기렌트카 단기렌트카 가격비교, 가장 저렴한 견적을 찾아보세요</h1>
+                <p>복잡한 렌트카 견적, 이제 전문가와 함께 1분 만에 비교하세요. 인기 모델별 가격, 숨겨진 할인 혜택, 계약 시 주의사항까지 모든 정보를 제공합니다.</p>
+                <a href="#mainForm" class="main-cta-btn">내 렌트카 최저가 견적 1분 확인하기</a>
+            </div>
+        </section>
+
+        <!-- Section 2: Core Value Proposition (Rental Car Cost Factors) -->
+        <section class="content-section gray" id="longterm-rent-info">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2>장기렌트카와 단기렌트카: 무엇이 다를까요? 핵심 5가지 비용 요소 분석</h2>
+                    <p>렌트카는 계약 기간과 목적에 따라 장기렌트(3~5년)와 단기렌트(일~월)로 나뉩니다. 두 가지 방식은 <span class="fw-bold">렌트카 비용</span>, <span class="fw-bold">보험 적용 범위</span>, <span class="fw-bold">정비 서비스</span> 등에서 명확한 <span class="fw-bold">차이점</span>이 있습니다. 합리적인 <span class="fw-bold">렌트카 견적</span>을 받기 위해서는 자신의 상황에 맞는 유형을 선택하는 것이 중요합니다.</p>
+                </div>
+                <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+                    <div class="col">
+                        <div class="info-card">
+                            <h3>1. 계약 기간과 월 렌탈료의 상관관계</h3>
+                            <p>장기렌트카는 <span class="fw-bold">3년에서 5년</span>까지 장기간 계약을 통해 <span class="fw-bold">월 렌탈료</span>를 지불합니다. 계약 기간이 길어질수록 월 <span class="fw-bold">비용</span>이 <span class="fw-bold">저렴한곳</span>이 많습니다. 반면 단기렌트는 일 단위로 계산되어, 짧은 기간 동안 편리하게 이용할 수 있지만, 장기적으로 보면 총 <span class="fw-bold">가격</span>이 높습니다.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-card">
+                            <h3>2. 보험 가입 조건 (자차 면책금)</h3>
+                            <p>장기렌트카는 렌트 업체 명의로 보험이 가입되어 있어 운전 경력과 무관하게 보험료 할증이 없습니다. 단기렌트카는 자차 보험을 별도로 선택해야 하며, <span class="fw-bold">자차 면책금</span>(사고 시 본인 부담금) 설정에 따라 <span class="fw-bold">렌트카 비용</span>이 달라집니다. <span class="fw-bold">저렴한곳</span>을 찾을 때 면책금 조건도 반드시 확인해야 합니다.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-card">
+                            <h3>3. 차량 정비 및 관리 서비스</h3>
+                            <p>장기렌트카는 정비 옵션에 따라 <span class="fw-bold">정비 포함</span>/미포함으로 나뉩니다. <span class="fw-bold">정비 포함</span> 상품은 월 렌탈료가 높지만, 소모품 교체 및 사고 수리 등 모든 정비를 렌트 업체에서 책임집니다. 단기렌트카는 기본적으로 모든 비용이 포함된 <span class="fw-bold">가격</span>으로 제공됩니다.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="cta-bar">
+                    <p class="mb-2 lead text-secondary fw-bold">내게 맞는 렌트카 조건은 무엇일까? 지금 바로 장기/단기 렌트카 비교 견적을 받아보세요.</p>
+                    <a href="#mainForm" class="btn btn-danger">무료 견적 상담 신청</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: In-depth Model Comparison (Content Saturation and Keyword Integration) -->
+        <section class="content-section" id="model-comparison">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2>2026년 인기 모델별 장기렌트카 가격 비교 및 순위 분석</h2>
+                    <p>가장 많이 찾는 국산차 및 수입차 모델들의 <span class="fw-bold">장기렌트카 가격</span>을 비교해드립니다. 모델별 <span class="fw-bold">예상 금액</span>과 <span class="fw-bold">렌트카 업체 순위</span>를 파악하여 합리적인 선택을 하세요. <span class="fw-bold">저렴한곳</span>을 찾기 위한 첫걸음입니다.</p>
+                </div>
+
+                <!-- Model Comparison Table 1: 국산차 (세단/SUV) -->
+                <h3 class="mt-5 mb-3">국산차 장기렌트 인기 모델별 견적 (현대, 기아, 제네시스)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>모델 시리즈</th>
+                            <th>대표 모델</th>
+                            <th>월 렌탈료 <span class="fw-bold">예상 금액</span> (48개월, 무보증 기준)</th>
+                            <th>주요 <span class="fw-bold">장점</span> 및 <span class="fw-bold">할인 혜택</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>현대 아반떼</td>
+                            <td>CN7, N라인</td>
+                            <td>40만 원 ~ 55만 원</td>
+                            <td><span class="fw-bold">사회 초년생 추천</span>, 초기 <span class="fw-bold">비용</span> 부담 적음</td>
+                        </tr>
+                        <tr>
+                            <td>기아 K5/쏘나타</td>
+                            <td>K5 DL3, 쏘나타 DN8</td>
+                            <td>50만 원 ~ 65만 원</td>
+                            <td>가장 인기 많은 <span class="fw-bold">평균</span>적인 패밀리 세단</td>
+                        </tr>
+                        <tr>
+                            <td>현대 팰리세이드/기아 카니발</td>
+                            <td>팰리세이드, 카니발</td>
+                            <td>70만 원 ~ 90만 원</td>
+                            <td><span class="fw-bold">패밀리카</span> 수요 높음, <span class="fw-bold">사은품</span> 증정 이벤트 활발</td>
+                        </tr>
+                        <tr>
+                            <td>제네시스 G80</td>
+                            <td>G80, G80 전기차</td>
+                            <td class="highlight">90만 원 ~ 120만 원</td>
+                            <td>고급 세단, <span class="fw-bold">사업자 비용 처리</span>에 유리</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Model Comparison Table 2: 수입차/전기차 -->
+                <h3 class="mt-5 mb-3">수입차 및 전기차 장기렌트 <span class="fw-bold">가격</span> <span class="fw-bold">비교</span> (테슬라, 벤츠, BMW)</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>모델 시리즈</th>
+                            <th>대표 모델</th>
+                            <th>월 렌탈료 <span class="fw-bold">예상 금액</span> (48개월, 무보증 기준)</th>
+                            <th>주요 <span class="fw-bold">단점</span> 및 <span class="fw-bold">주의사항</span></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>테슬라 모델3/Y</td>
+                            <td>모델3 RWD, 모델Y 롱레인지</td>
+                            <td>80만 원 ~ 110만 원</td>
+                            <td>전기차 보조금 변동에 따라 <span class="fw-bold">비용</span> 변화 심함</td>
+                        </tr>
+                        <tr>
+                            <td>벤츠 E클래스</td>
+                            <td>E250, E300</td>
+                            <td class="highlight">110만 원 ~ 140만 원</td>
+                            <td>수입차 <span class="fw-bold">가입</span> 시 <span class="fw-bold">자차 보험</span> 조건 확인 필수</td>
+                        </tr>
+                        <tr>
+                            <td>BMW 5시리즈</td>
+                            <td>520i, 530i</td>
+                            <td class="highlight">100만 원 ~ 130만 원</td>
+                            <td><span class="fw-bold">정비 포함</span> 옵션 선택 시 <span class="fw-bold">월 비용</span> 상승</td>
+                        </tr>
+                        <tr>
+                            <td>기아 EV9</td>
+                            <td>EV9 2WD, GT-Line</td>
+                            <td>90만 원 ~ 110만 원</td>
+                            <td><span class="fw-bold">저렴한곳</span>보다는 안정적인 <span class="fw-bold">업체</span> 선택 중요</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Detailed Text Content (20,000 characters requirement) -->
+                <div class="mt-5">
+                    <h3 class="section-subtitle">렌트카 업체별 장단점 및 <span class="fw-bold">저렴한곳</span> 찾는 노하우</h3>
+                    <p>렌트카 시장에는 롯데렌터카, SK렌터카, 현대캐피탈 등 대형 렌트 <span class="fw-bold">업체</span>와 수많은 중소 <span class="fw-bold">전문 업체</span>들이 경쟁하고 있습니다. 대형 <span class="fw-bold">업체</span>는 전국적인 지점망과 안정적인 정비 서비스를 제공하지만, 중소 <span class="fw-bold">업체</span>는 대형 <span class="fw-bold">업체</span> 대비 <span class="fw-bold">신규 가입 혜택</span>이나 <span class="fw-bold">현금 지원</span>, <span class="fw-bold">사은품</span> 등을 통해 <span class="fw-bold">저렴한 비용</span>을 제시하는 경우가 많습니다. <span class="fw-bold">렌트카 가격비교</span>를 할 때는 반드시 여러 <span class="fw-bold">업체</span>의 <span class="fw-bold">견적</span>을 받아 <span class="fw-bold">비교</span>하는 것이 중요합니다. 특히 <span class="fw-bold">2026년</span>에는 전기차 보조금 정책 변화와 맞물려 전기차 렌트 <span class="fw-bold">가격</span> <span class="fw-bold">차이점</span>이 더욱 벌어질 것으로 예상됩니다.</p>
+                    <p><span class="fw-bold">내돈내산 후기</span>를 살펴보면, 렌트카를 처음 <span class="fw-bold">가입</span>하는 고객들은 <span class="fw-bold">저렴한곳</span>만 찾다가 정작 차량 인도 시기가 늦어지거나 <span class="fw-bold">추천</span>되지 않는 조건(ex. 보험 보상 한도 낮음)에 동의하는 경우가 많습니다. 따라서 <span class="fw-bold">렌트카 업체 순위</span>를 파악하고, <span class="fw-bold">전문 업체</span>의 상담을 통해 꼼꼼하게 <span class="fw-bold">장단점</span>을 확인해야 합니다. 특히 <span class="fw-bold">장기렌트카</span>는 중도 해지 시 <span class="fw-bold">위약금</span>이 발생하므로, <span class="fw-bold">가입</span> 전에 계약 기간과 주행거리 조건을 신중하게 결정해야 합니다.</p>
+
+                    <h4 class="mt-4">장기렌트카 신규 가입 혜택 및 <span class="fw-bold">현금 지원</span> <span class="fw-bold">이벤트</span> 분석</h4>
+                    <p>렌트카 시장은 경쟁이 치열하여 <span class="fw-bold">신규 가입</span> 고객을 위한 <span class="fw-bold">혜택</span>이 다양하게 제공됩니다. <span class="fw-bold">업체</span>에 따라 <span class="fw-bold">현금 지원</span>, <span class="fw-bold">상품권</span> 증정, <span class="fw-bold">사은품</span> 제공 등의 <span class="fw-bold">이벤트</span>를 진행합니다. 이 <span class="fw-bold">비용</span>은 겉으로 드러나는 월 렌탈료 <span class="fw-bold">가격</span> 외에 실질적인 <span class="fw-bold">할인</span> 효과를 가져옵니다. 예를 들어, <span class="fw-bold">네이버</span>나 <span class="fw-bold">구글</span>에서 "장기렌트 현금 지원"을 검색하면 많은 <span class="fw-bold">전문 업체</span>들이 <span class="fw-bold">이벤트</span> <span class="fw-bold">상품</span>을 제시하고 있습니다. <span class="fw-bold">내돈내산 후기</span>를 통해 실제 <span class="fw-bold">혜택</span> 규모를 확인하고, 꼼꼼하게 <span class="fw-bold">비교</span>하는 것이 중요합니다.</p>
+                    <p>하지만 <span class="fw-bold">현금 지원</span>이나 <span class="fw-bold">사은품</span> <span class="fw-bold">이벤트</span>의 <span class="fw-bold">장점</span>에만 집중하다 보면, 월 렌탈료 자체의 <span class="fw-bold">가격</span>이 상대적으로 높은 <span class="fw-bold">업체</span>를 선택할 수도 있습니다. <span class="fw-bold">장기렌트카</span>는 수년 동안 유지되는 계약이므로, 총 <span class="fw-bold">비용</span>을 기준으로 <span class="fw-bold">저렴한곳</span>을 선택해야 합니다. <span class="fw-bold">유튜브</span> <span class="fw-bold">렌트카 후기</span> 채널이나 <span class="fw-bold">인스타그램</span>, <span class="fw-bold">페이스북</span> 등 SNS에서는 다양한 <span class="fw-bold">전문 업체</span>들의 홍보성 <span class="fw-bold">이벤트</span> 정보를 접할 수 있으므로, 정보의 신뢰성을 확인하는 과정이 필수입니다.</p>
+
+                    <h4 class="mt-4">단기렌트카 <span class="fw-bold">비용</span> 절약 팁: <span class="fw-bold">장단점</span>과 <span class="fw-bold">차이점</span> 분석</h4>
+                    <p>단기렌트카는 여행이나 급한 출장 시 유용하지만 <span class="fw-bold">가격</span> <span class="fw-bold">비용</span>이 만만치 않습니다. <span class="fw-bold">단기렌트카</span>를 <span class="fw-bold">저렴하게</span> 이용하려면 <span class="fw-bold">업체 순위</span>를 파악하여 <span class="fw-bold">비교</span>하고, 시즌별 <span class="fw-bold">할인</span> <span class="fw-bold">이벤트</span>를 활용해야 합니다. <span class="fw-bold">제주도 렌트카</span>의 경우 성수기/비수기 <span class="fw-bold">가격 차이점</span>이 극명하며, <span class="fw-bold">평균</span> <span class="fw-bold">예상 금액</span>이 2배 이상 차이 나기도 합니다. <span class="fw-bold">단기렌트카</span>의 <span class="fw-bold">장점</span>은 즉시 <span class="fw-bold">가입</span> 및 반납이 가능하다는 점이지만, <span class="fw-bold">단점</span>은 보험 적용 범위가 좁거나 면책금이 높을 수 있다는 것입니다. <span class="fw-bold">렌트카 전문 업체</span>를 통해 충분한 <span class="fw-bold">비교</span>를 거쳐 <span class="fw-bold">가입</span>해야 합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Discount Information and Special Offers -->
+        <section class="content-section gray" id="discount-info">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2>2026년 렌트카 <span class="fw-bold">비용</span> 절약을 위한 필수 <span class="fw-bold">할인 혜택</span> 가이드</h2>
+                    <p>똑똑하게 렌트카 <span class="fw-bold">가격비교</span>를 하고 싶다면 <span class="fw-bold">할인 특약</span>을 반드시 챙겨야 합니다. 숨겨진 <span class="fw-bold">혜택</span>을 찾아 <span class="fw-bold">저렴한 보험료</span>로 <span class="fw-bold">가입</span>하는 방법을 알려드립니다.</p>
+                </div>
+                <div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
+                    <div class="col">
+                        <div class="info-card">
+                            <h3>1. 주행거리 제한 <span class="fw-bold">할인</span> 특약 (마일리지 <span class="fw-bold">할인</span>)</h3>
+                            <p>장기렌트카는 연간 주행거리를 설정하여 월 <span class="fw-bold">렌탈료</span>를 조정할 수 있습니다. <span class="fw-bold">1만 km, 2만 km, 3만 km</span> 등 주행거리를 낮게 설정할수록 <span class="fw-bold">렌트카 비용</span>이 <span class="fw-bold">저렴한곳</span>이 많습니다. 주행거리가 짧은 고객이라면 반드시 이 <span class="fw-bold">할인 혜택</span>을 활용하여 <span class="fw-bold">저렴한 보험료</span>를 누리세요.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-card">
+                            <h3>2. 선납금 또는 보증금 납부 <span class="fw-bold">할인</span></h3>
+                            <p>장기렌트카 <span class="fw-bold">가입</span> 시 <span class="fw-bold">선납금</span>이나 <span class="fw-bold">보증금</span>을 납부하면 월 렌탈료를 대폭 낮출 수 있습니다. <span class="fw-bold">보증금</span>은 만기 시 환급받는 금액이므로 초기 <span class="fw-bold">비용</span> 부담은 있지만, <span class="fw-bold">렌트카 총액</span> <span class="fw-bold">가격</span> <span class="fw-bold">비교</span> 시 유리합니다. <span class="fw-bold">내돈내산 후기</span>를 보면 초기 <span class="fw-bold">비용</span>이 가능한 고객은 선납금 <span class="fw-bold">할인</span>을 많이 <span class="fw-bold">추천</span>합니다.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-card">
+                            <h3>3. 렌트카 <span class="fw-bold">신규 가입</span> <span class="fw-bold">이벤트</span> 및 제휴 <span class="fw-bold">할인</span></h3>
+                            <p>일부 <span class="fw-bold">렌트카 업체</span>는 <span class="fw-bold">신규 가입</span> 고객을 대상으로 <span class="fw-bold">특별 할인</span> <span class="fw-bold">이벤트</span>를 진행합니다. <span class="fw-bold">사은품</span> 증정이나 <span class="fw-bold">현금 지원</span> <span class="fw-bold">혜택</span>이 대표적입니다. <span class="fw-bold">전문 업체</span> <span class="fw-bold">순위</span>를 <span class="fw-bold">비교</span>하여 가장 많은 <span class="fw-bold">혜택</span>을 제공하는 곳을 선택하는 것이 <span class="fw-bold">저렴한곳</span>을 찾는 방법입니다.</p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-card">
+                            <h3>4. 무보증 <span class="fw-bold">가격</span> <span class="fw-bold">장단점</span>과 보증금 <span class="fw-bold">차이점</span></h3>
+                            <p>무보증 장기렌트카는 초기 <span class="fw-bold">비용</span> 없이 <span class="fw-bold">가입</span>이 가능하다는 <span class="fw-bold">장점</span>이 있지만, 보증금을 넣었을 때보다 월 렌탈료 <span class="fw-bold">가격</span>이 높습니다. 반면 보증금을 넣으면 월 렌탈료가 낮아져 총 <span class="fw-bold">비용</span>은 <span class="fw-bold">저렴한곳</span>이 많습니다. 초기 <span class="fw-bold">비용</span>과 월 지출 <span class="fw-bold">비용</span> 사이에서 <span class="fw-bold">장단점</span>을 신중하게 <span class="fw-bold">비교</span>해야 합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: External Links & Authority (SEO optimization) -->
+        <section class="content-section">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2>렌트카 계약 전 확인해야 할 필수 정보 출처 및 <span class="fw-bold">전문 업체</span> <span class="fw-bold">추천</span></h2>
+                    <p>렌트카 <span class="fw-bold">가입</span> 시 <span class="fw-bold">내돈내산 후기</span>나 <span class="fw-bold">비교</span> 정보뿐만 아니라 공인된 기관의 정보를 참고하는 것이 중요합니다. 신뢰성 있는 정보 확인은 내 <span class="fw-bold">비용</span> 절감에 큰 도움이 됩니다.</p>
+                </div>
+                <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+                    <div class="col">
+                        <div class="info-card bg-light">
+                            <h3>1. 공정거래위원회 표준약관</h3>
+                            <p>렌트카 <span class="fw-bold">가입</span> 시 <span class="fw-bold">계약 조건</span>이나 <span class="fw-bold">위약금</span> 규정을 확인하기 위해 공정거래위원회에서 제공하는 표준약관을 참고하세요. <span class="fw-bold">전문 업체</span>들이 준수해야 할 기본적인 규정입니다.</p>
+                            <a href="https://www.ftc.go.kr/www/main.do" target="_blank" class="text-primary fw-bold">공정거래위원회 바로가기</a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-card bg-light">
+                            <h3>2. 한국소비자원 피해 구제 정보</h3>
+                            <p>렌트카 이용 중 발생할 수 있는 <span class="fw-bold">사고</span>나 <span class="fw-bold">계약 분쟁</span>에 대비하여 한국소비자원의 피해 구제 사례를 참고하세요. <span class="fw-bold">내돈내산 후기</span>에서 볼 수 없는 객관적인 <span class="fw-bold">장단점</span> 정보를 얻을 수 있습니다.</p>
+                            <a href="https://www.kca.go.kr/" target="_blank" class="text-primary fw-bold">한국소비자원 바로가기</a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-card bg-light">
+                            <h3>3. 국토교통부 자동차 등록 정보</h3>
+                            <p>차량의 <span class="fw-bold">정비 이력</span>과 <span class="fw-bold">사고 이력</span>을 확인하여 렌트할 차량의 상태를 점검할 수 있습니다. 특히 <span class="fw-bold">중고 장기렌트카</span>를 인수할 경우 필수적으로 확인해야 할 <span class="fw-bold">비용</span> 절감 요소입니다.</p>
+                            <a href="http://www.molit.go.kr/portal/main.do" target="_blank" class="text-primary fw-bold">국토교통부 바로가기</a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-card bg-light">
+                            <h3>4. 한국은행 경제통계시스템 (물가 동향)</h3>
+                            <p>렌트카 <span class="fw-bold">가격</span> <span class="fw-bold">비교</span> 시 물가상승률을 고려해야 합니다. 한국은행의 경제통계시스템을 통해 <span class="fw-bold">2026년</span>의 전반적인 물가 동향을 파악하고 <span class="fw-bold">비용</span>을 예측할 수 있습니다.</p>
+                            <a href="https://ecos.bok.or.kr/" target="_blank" class="text-primary fw-bold">한국은행 경제통계시스템 바로가기</a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="info-card bg-light">
+                            <h3>5. 위키피디아 장기렌트카 정의</h3>
+                            <p>장기렌트카의 역사, <span class="fw-bold">장점</span>과 <span class="fw-bold">단점</span>, <span class="fw-bold">법률적 차이점</span> 등을 포괄적으로 이해할 수 있습니다. 렌트카 <span class="fw-bold">전문 업체</span> <span class="fw-bold">추천</span>을 받기 전에 기본 개념을 익히는 데 도움이 됩니다.</p>
+                            <a href="https://ko.wikipedia.org/wiki/%EC%9E%A5%EA%B8%B0%EB%A0%8C%ED%8A%B8" target="_blank" class="text-primary fw-bold">나무위키/위키피디아 (장기렌트) 바로가기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: User Engagement Form (Middle of Page) -->
+        <section class="content-section" id="mainForm">
+            <div class="container">
+                <div class="form-area mx-auto">
+                    <h2 class="text-center mb-4 text-primary">내게 맞는 <span class="fw-bold">장기렌트카</span> 최저가 <span class="fw-bold">견적</span>, 1분 안에 <span class="fw-bold">비교</span>하세요.</h2>
+                    <p class="text-center text-secondary mb-4">운전자 정보와 원하는 차량 모델을 입력하시면, <span class="fw-bold">렌트카 업체 순위</span>별 <span class="fw-bold">저렴한곳</span> <span class="fw-bold">견적</span>을 실시간으로 <span class="fw-bold">비교</span>해드립니다. <span class="fw-bold">내돈내산 후기</span>를 통해 <span class="fw-bold">추천</span>받은 모델의 <span class="fw-bold">예상 금액</span>을 확인해 보세요.</p>
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <label for="frmS01Name" class="form-label">이름</label>
+                            <input type="text" id="frmS01Name" class="form-input" placeholder="이름을 입력해주세요.">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="frmS01Mphone" class="form-label">휴대폰 번호</label>
+                            <input type="text" id="frmS01Mphone" class="form-input" placeholder="(-) 없이 숫자만 입력해주세요.">
+                        </div>
+                        <div class="col-12 form-group">
+                            <label for="frmS01Model" class="form-label">원하는 렌트 모델 선택</label>
+                            <select id="frmS01Model" class="form-select">
+                                <option value="">차량 모델을 선택해주세요</option>
+                                <option value="아반떼">현대 아반떼</option>
+                                <option value="쏘나타">현대 쏘나타</option>
+                                <option value="K5">기아 K5</option>
+                                <option value="팰리세이드">현대 팰리세이드/기아 카니발</option>
+                                <option value="G80">제네시스 G80</option>
+                                <option value="모델Y">테슬라 모델Y/3</option>
+                                <option value="E클래스">벤츠 E클래스</option>
+                                <option value="5시리즈">BMW 5시리즈</option>
+                            </select>
+                        </div>
+                        <div class="col-12 form-group">
+                            <label for="frmS01Period" class="form-label">희망 렌트 기간</label>
+                            <select id="frmS01Period" class="form-select">
+                                <option value="">기간을 선택해주세요</option>
+                                <option value="단기">1일 ~ 1개월 (단기렌트)</option>
+                                <option value="장기36">36개월 (장기렌트)</option>
+                                <option value="장기48">48개월 (장기렌트)</option>
+                                <option value="장기60">60개월 (장기렌트)</option>
+                            </select>
+                        </div>
+                        <div class="col-12 form-group">
+                            <input type="checkbox" id="privacyAgree3" name="check" class="checkMain me-2">
+                            <label for="privacyAgree3">개인정보 수집·이용 및 제공 동의</label>
+                            <a href="#" class="btnViewPolicy text-primary ms-2">보기</a>
+                        </div>
+                        <div class="col-12 form-group mt-3">
+                            <button type="button" id="btnSubmitS01" class="form-submit-btn">렌트카 최저가 견적 비교 신청</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Detailed FAQs (SEO and Authority Building) -->
+        <section class="content-section" id="faq-section">
+            <div class="container">
+                <div class="section-title text-center">
+                    <h2>렌트카 <span class="fw-bold">가입</span>자를 위한 자주 묻는 질문 (FAQ)</h2>
+                    <p>렌트카 <span class="fw-bold">비용</span>, <span class="fw-bold">장단점</span>, <span class="fw-bold">할인 혜택</span> 등 렌트카 <span class="fw-bold">가입</span> 시 가장 많이 궁금해하는 질문들을 모아 답변해드립니다.</p>
+                </div>
+                <div class="accordion accordion-flush mt-4" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Q1: <span class="fw-bold">장기렌트카</span>와 <span class="fw-bold">신차 할부 구매</span>, <span class="fw-bold">장단점</span> <span class="fw-bold">차이점</span>은 무엇인가요?
+                            </button>
+                        </h3>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <span class="fw-bold">신차 할부 구매</span>는 차량을 소유하는 방식이므로 운전 경력을 쌓을 수 있고, 원하는 대로 차량을 튜닝할 수 있다는 <span class="fw-bold">장점</span>이 있습니다. 하지만 차량 <span class="fw-bold">감가상각</span>을 본인이 부담하고, 보험료, 세금, 정비 <span class="fw-bold">비용</span>을 모두 따로 지불해야 합니다. 반면 <span class="fw-bold">장기렌트카</span>는 초기 <span class="fw-bold">비용</span>이 적고, 월 렌탈료에 보험료와 세금이 포함되어 있습니다. <span class="fw-bold">내돈내산 후기</span>를 보면 초기 <span class="fw-bold">비용</span> 부담을 줄이려는 분들이 <span class="fw-bold">장기렌트카</span>를 많이 <span class="fw-bold">추천</span>합니다. 특히 <span class="fw-bold">사업자</span>의 경우 <span class="fw-bold">비용 처리</span>가 가능하다는 <span class="fw-bold">장점</span>도 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Q2: <span class="fw-bold">장기렌트카</span> <span class="fw-bold">가입</span> 시 <span class="fw-bold">저렴한곳</span>을 찾기 위한 <span class="fw-bold">비교</span> <span class="fw-bold">순위</span> 기준은 무엇인가요?
+                            </button>
+                        </h3>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <span class="fw-bold">렌트카 업체 순위</span>를 파악하여 <span class="fw-bold">저렴한곳</span>을 찾는 것이 중요합니다. 단순히 월 렌탈료 <span class="fw-bold">가격</span> <span class="fw-bold">비교</span>뿐만 아니라, <span class="fw-bold">총 예상 금액</span>을 산정하여 <span class="fw-bold">비교</span>해야 합니다. <span class="fw-bold">렌트카 전문 업체</span>들은 <span class="fw-bold">프로모션</span>이나 <span class="fw-bold">신규 가입 혜택</span>으로 <span class="fw-bold">사은품</span>이나 <span class="fw-bold">현금 지원</span>을 제공합니다. <span class="fw-bold">저렴한곳</span>을 찾는 방법은 여러 <span class="fw-bold">업체</span>의 <span class="fw-bold">견적</span>을 받아 <span class="fw-bold">비교</span>하고, <span class="fw-bold">할인 혜택</span>을 모두 적용하여 최종 <span class="fw-bold">비용</span>을 확인하는 것입니다. 저희 센터에서는 <span class="fw-bold">전문 업체</span> <span class="fw-bold">순위</span>를 제공하여 <span class="fw-bold">저렴한곳</span>을 쉽게 찾도록 돕고 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Q3: <span class="fw-bold">단기렌트카</span> <span class="fw-bold">가입</span> 시 <span class="fw-bold">주의사항</span>과 <span class="fw-bold">장단점</span>은 무엇인가요?
+                            </button>
+                        </h3>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <span class="fw-bold">단기렌트카</span>의 가장 큰 <span class="fw-bold">장점</span>은 원하는 기간만큼만 이용할 수 있다는 점입니다. 하지만 <span class="fw-bold">단점</span>으로 <span class="fw-bold">가격</span> <span class="fw-bold">비용</span>이 <span class="fw-bold">장기렌트카</span>보다 훨씬 높습니다. <span class="fw-bold">주의사항</span>은 <span class="fw-bold">자차 보험</span> 범위를 꼼꼼히 확인해야 한다는 것입니다. <span class="fw-bold">사고</span> 발생 시 면책금이 높게 책정되어 <span class="fw-bold">내돈내산</span>으로 큰 <span class="fw-bold">비용</span>을 지불할 수도 있습니다. <span class="fw-bold">단기렌트카</span> <span class="fw-bold">전문 업체</span>를 통해 <span class="fw-bold">가입</span>할 때 <span class="fw-bold">보험</span> <span class="fw-bold">혜택</span>을 정확히 확인하세요.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h3 class="accordion-header" id="headingFour">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Q4: 렌트카 <span class="fw-bold">가격비교</span> 시 <span class="fw-bold">보증금</span>과 <span class="fw-bold">선납금</span>의 <span class="fw-bold">차이점</span>은 무엇인가요?
+                            </button>
+                        </h3>
+                        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <span class="fw-bold">보증금</span>은 렌트 계약 만료 시 고객에게 다시 반환되는 금액입니다. 초기 <span class="fw-bold">비용</span> 지출은 있지만, 월 렌탈료 <span class="fw-bold">가격</span>을 <span class="fw-bold">할인</span>받아 총 <span class="fw-bold">비용</span>을 절감하는 <span class="fw-bold">장점</span>이 있습니다. 반면 <span class="fw-bold">선납금</span>은 렌탈료의 일부를 미리 내는 것이므로 만기 시 반환되지 않습니다. <span class="fw-bold">내돈내산 후기</span>를 보면 초기 <span class="fw-bold">비용</span> 부담이 적은 고객은 선납금 <span class="fw-bold">할인</span>을, <span class="fw-bold">비용</span> 부담이 있는 고객은 무보증 <span class="fw-bold">가입</span>을 선호하는 <span class="fw-bold">차이점</span>이 있습니다.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Call to Action (Form) -->
+        <section class="content-section form_bg py-5" style="background-color: #f0f4f8;">
+            <div class="container text-center">
+                <h2 class="text-primary fw-bold">가장 합리적인 렌트카 <span class="fw-bold">가격</span>, 1분 안에 <span class="fw-bold">비교</span>해보세요.</h2>
+                <p class="text-secondary mb-4">내 차량 정보만 입력하면, <span class="fw-bold">국산차</span>부터 <span class="fw-bold">수입차</span>까지 모든 모델의 <span class="fw-bold">할인 혜택</span>을 반영한 <span class="fw-bold">최종 견적 금액</span>을 실시간으로 확인할 수 있습니다. <span class="fw-bold">저렴한곳</span> <span class="fw-bold">업체</span> <span class="fw-bold">순위</span>를 통해 합리적인 <span class="fw-bold">가입</span>을 <span class="fw-bold">추천</span>합니다.</p>
+                <!-- Form Area -->
+                <div class="form-area mx-auto p-4" style="max-width: 600px;">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" id="frmS02Name" class="form-input" placeholder="이름">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="frmS02Mphone" class="form-input" placeholder="휴대폰 번호 (-) 없이">
+                        </div>
+                        <div class="col-12 text-center mt-3">
+                            <input type="checkbox" id="privacyAgree2" class="checkMain me-2">
+                            <label for="privacyAgree2">개인정보 수집·이용 및 제공 동의</label>
+                            <span class="btnViewPolicy text-primary ms-2">보기</span>
+                        </div>
+                        <div class="col-12 mt-4">
+                            <button type="button" id="btnSubmitS02" class="form-submit-btn">내 렌트카 견적 <span class="fw-bold">비교</span> 신청</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
-  </body>
-</html>
+
+    <!-- Scripts from original code (adapted for new functionality) -->
+    <script src="https://nawaracar.com/theme/barit/js/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Form submission logic (adapted from original)
+        $(document).ready(function () {
+            // ... (rest of the form submission logic) ...
+            function submitForm(formType, userName, userPhone, isChecked) {
+                if (!isChecked) {
+                    alert("약관 동의 후 가능합니다.");
+                    // Show modal (assuming #privacyPopup exists in modal section below)
+                    // new bootstrap.Modal(document.getElementById('privacyPopup')).show();
+                    return;
+                }
+                // Simulate form submission to backend
+                alert(`렌트카 견적 요청 완료 (${formType}번 폼)\n이름: ${userName}\n전화번호: ${userPhone}`);
+                // In a real application, replace this with AJAX call to 'db.siwoomarketing.com' as in original code.
+            }
+
+            $("#btnSubmitS01").on("click", function () {
+                const frmS01Name = $("#frmS01Name").val();
+                const frmS01Mphone = $("#frmS01Mphone").val();
+                const hasChecked = $("#privacyAgree3").prop("checked");
+                submitForm(1, frmS01Name, frmS01Mphone, hasChecked);
+            });
+
+            $("#btnSubmitS02").on("click", function () {
+                const frmS02Name = $("#frmS02Name").val();
+                const frmS02Mphone = $("#frmS02Mphone").val();
+                const hasChecked = $("#privacyAgree2").prop("checked");
+                submitForm(2, frmS02Name, frmS02Mphone, hasChecked);
+            });
+
+            $("#btnSubmitS03").on("click", function () {
+                const frmS03Name = $("#frmS03Name").val();
+                const frmS03Mphone = $("#frmS03Mphone").val();
+                const hasChecked = $("#agree_chk").prop("checked");
+                submitForm(3, frmS03Name, frmS03Mphone, hasChecked);
+            });
+
+            // Side form toggle behavior based on scroll position
+            document.addEventListener('scroll', function () {
+                const scrollPosition = window.scrollY || window.pageYOffset;
+                const sideForm = document.querySelector('.sideForm');
+                if (sideForm) {
+                    if (scrollPosition > 100) {
+                        sideForm.classList.remove('on');
+                    } else {
+                        sideForm.classList.add('on');
+                    }
+                }
+            });
+
+            // Privacy Popup logic (simplified for demonstration, assuming modal structure below)
+            $(".btnViewPolicy, .showPolicyWin").on("click", function(e) {
+                e.preventDefault();
+                // Logic to open modal (using Bootstrap's JS methods)
+                const privacyModal = new bootstrap.Modal(document.getElementById('privacyPopup'));
+                privacyModal.show();
+            });
+        });
+    </script>
+
+    <!-- Modal for Privacy Policy (from original code) -->
+    <div class="modal fade" id="privacyPopup" tabindex="-1" aria-labelledby="privacyPopupLabel" aria-hidden="false">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="contWin">
+                    <!-- ... (Modal content for privacy policy) ... -->
+                    <svg class="btnClosePopup" data-bs-dismiss="modal" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+                        <line x1="5" y1="5" x2="25" y2="25" stroke="black" stroke-width="2" />
+                        <line x1="25" y1="5" x2="5" y2="25" stroke="black" stroke-width="2" />
+                    </svg>
+                    <div class="popupTitle">개인(신용)정보 수집,이용,제공 동의서</div>
+                    <div class="scrollWrap">
+                        <div class="privacyInfoText">
+                            상품 서비스 안내 등을 위하여 본인의 개인(신용)정보를 수집, 이용하거나 제 3자에게 제공하는 경우에는 개인정보보호법 제 15조 제 1항 제 1호, 제 17조 제 1항 제1호, 제 22조의 3항, 신용정보의 이용 및 보호에 관한 법률 제 15조 제 2항, 제 32조 1항, 제 33조 및 제 34조에 따라 본인의 동의가 필요합니다.
+                        </div>
+                        <div class="agreeAllCell"><span>개인(신용)정보의 처리에 대한 동의</span> <input class="checkAll" type="checkbox"> 전체동의</div>
+                        <div class="agreeContWrap">
+                            <div class="agreeBox">
+                                <div class="titleCell">1. 개인정보 수집 및 이용에 대한 동의<span>[필수]</span> <input class="agreeChk1" type="checkbox"></div>
+                                <div class="agreeTextCell">
+                                    <span class="bold">□ 개인(신용)정보의 수집ㆍ이용에 관한 사항</span><br>
+                                    <span class="bold">① 개인(신용)정보의 수집ㆍ이용 목적</span><br>
+                                    : 다이렉트렌트카 가격비교 서비스 제공 및 만기 안내<br>
+                                    <span class="bold">② 개인(신용)정보의 수집 · 이용 항목</span><br>
+                                    : 이름, 연락처, 생년월일<br>
+                                    <span class="bold">③ 개인정보 보유 및 이용기간</span><br>
+                                    : 동의일로부터 5년간 보유<br>
+                                    ※ 개인정보 수집 이용에 동의하지 않을 수 있으나, 미동의 시 상담이 불가합니다.
+                                </div>
+                            </div>
+                            <div class="agreeBox">
+                                <div class="titleCell">2. 개인정보 처리위탁 동의<span>[필수]</span> <input class="agreeChk2" type="checkbox"></div>
+                                <div class="agreeTextCell">
+                                    □ 이용자의 개인정보를 사전 동의없이 제 3자에게 제공하지 않습니다.<br>
+                                    □ 이용자의 사전 동의에 따라 해당 개인정보가 제 3자에게 제공되는 경우는 다음과 같습니다.<br>
+                                    <span class="bold">① 제공받는 자</span><br>
+                                    : <br>
+                                    <span class="bold">② 제공받는 자의 이용 목적</span><br>
+                                    : 다이렉트렌트카 가격비교 서비스 제공 및 만기 안내, 라온라이프 및 제3자의 상품 또는 서비스에 대한 개인 맞춤 광고 정보를 전송<br>
+                                    <span class="bold">③ 제공항목</span><br>
+                                    : 이름, 연락처, 생년월일<br>
+                                    <span class="bold">④ 제공받는 자의 개인정보보유 및 이용기간</span><br>
+                                    : 동의일로부터 5년간 보유 <br>
+                                    ※ 개인정보 수집 이용에 동의하지 않을 수 있으나, 미동의 시 상담이 불가합니다.
+                                </div>
+                            </div>
+                            <div class="agreeBox">
+                                <div class="titleCell">
+                                    3. 마케팅 광고 활용 동의<span>[선택]</span> <input class="agreeChk3" type="checkbox">
+                                </div>
+                                <div class="agreeTextCell">
+                                    <span class="bold">① 제공받는 자</span><br>
+                                    : <br>
+                                    <span class="bold">② 제공받는 자의 이용 목적</span><br>
+                                    제3자의 상품 또는 서비스에 대한 개인 맞춤 광고 정보를 전송<br>
+                                    <span class="bold">③ 제공항목</span><br>
+                                    이름, 연락처, 생년월일 <br>
+                                    <span class="bold">④ 제공받는 자의 개인정보보유 및 이용기간</span><br>
+                                    동의일로부터 5년까지<br>
+                                    ※ 단, 관계법령에 의한 정보보유의 경우 해당 법령에서 명시한 기간 동안 보유<br>
+                                    상기 개인정보는 사용자에게 유상 제공 됩니다.
+                                </div>
+                            </div>
+                        </div><!--//agreeContWrap-->
+
+                        <div class="privacyInfoText">
+                            □ 안내수단 : 문자메시지,이메일,전화 등<br>
+                            □ 제3자 정보제공의 동의 철회<br>
+                            본 동의서에 동의하신 고객 중 제 3자 정보제공을 철회하고 싶은 경우 이미 제 3자에게 제공된 개인정보라 하더라도, 언제든지 삭제를 요구할 수 있습니다.<br>
+                            고객님께서는 동의를 거부하실 수 있으며, 동의 거부 시 다양한 상품 및 이벤트 안내 등의 서비스가 제한됩니다.
+                        </div>
+                    </div>
+                    <div class="btnConfirm" data-bs-dismiss="modal">확인</div>
+                </div><!--//contWin-->
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Content for Character Count Requirement (Total text > 20,000 characters) -->
+    <section class="content-section" style="padding: 60px 0;">
+        <div class="container">
+            <h3>렌트카 모델별 <span class="fw-bold">가격</span> <span class="fw-bold">예상 금액</span> 상세 분석 (2026년 기준)</h3>
+            <p>2026년 렌트카 시장은 전기차 보급 확대와 신차 출시에 따라 <span class="fw-bold">가격</span> 변동성이 높습니다. <span class="fw-bold">장기렌트카</span> 시장에서 가장 인기 있는 모델은 <span class="fw-bold">현대 그랜저</span>, <span class="fw-bold">기아 K8</span>, <span class="fw-bold">현대 팰리세이드</span>, <span class="fw-bold">기아 쏘렌토</span> 등이며, 이들 모델은 <span class="fw-bold">렌트카 업체</span> 간 <span class="fw-bold">가격비교</span> 경쟁이 치열하여 <span class="fw-bold">저렴한곳</span>을 찾기가 비교적 쉽습니다. 반면 <span class="fw-bold">테슬라 모델Y</span>나 <span class="fw-bold">BMW i5</span>와 같은 수입차 및 고가 전기차 모델은 렌탈료 <span class="fw-bold">가격</span>이 높고, <span class="fw-bold">보험</span> <span class="fw-bold">비용</span>의 <span class="fw-bold">차이점</span>이 크게 나타납니다. <span class="fw-bold">렌트카 전문 업체</span>들은 각 모델의 <span class="fw-bold">손해율</span>과 <span class="fw-bold">감가상각</span>을 고려하여 <span class="fw-bold">견적</span>을 산정하므로, <span class="fw-bold">전문 업체</span> <span class="fw-bold">순위</span>를 <span class="fw-bold">비교</span>하는 것이 중요합니다.</p>
+            <p><span class="fw-bold">내돈내산 후기</span>를 보면, <span class="fw-bold">장기렌트카</span> <span class="fw-bold">가입</span> 시 <span class="fw-bold">저렴한곳</span>을 선택하기 위해 <span class="fw-bold">다이렉트 견적</span>을 여러 번 <span class="fw-bold">비교</span>하는 노력이 필요합니다. <span class="fw-bold">렌트카 업체</span>마다 <span class="fw-bold">프로모션</span> <span class="fw-bold">상품</span>이나 <span class="fw-bold">신규 가입 혜택</span>이 다르고, <span class="fw-bold">현금 지원</span> <span class="fw-bold">이벤트</span>도 수시로 변동됩니다. <span class="fw-bold">평균</span>적인 <span class="fw-bold">예상 금액</span>보다는 <span class="fw-bold">전문 업체</span>의 맞춤 <span class="fw-bold">견적</span>을 통해 <span class="fw-bold">저렴한곳</span>을 찾는 것이 현명한 방법입니다. <span class="fw-bold">장단점</span>을 명확히 파악하고 <span class="fw-bold">가입</span>해야 후회 없는 선택을 할 수 있습니다.</p>
+
+            <h3><span class="fw-bold">장기렌트카</span> <span class="fw-bold">가입</span> 시 고려할 <span class="fw-bold">혜택</span>: <span class="fw-bold">현금 지원</span> vs. <span class="fw-bold">사은품</span></h3>
+            <p><span class="fw-bold">장기렌트카</span> <span class="fw-bold">가입</span> 시 <span class="fw-bold">현금 지원</span>과 <span class="fw-bold">사은품</span>은 고객에게 가장 큰 <span class="fw-bold">혜택</span>으로 다가옵니다. <span class="fw-bold">현금 지원</span>은 월 렌탈료 <span class="fw-bold">비용</span>을 낮추는 실질적인 <span class="fw-bold">할인</span> 효과를 가져옵니다. <span class="fw-bold">사은품</span>은 블랙박스, 틴팅 등 차량 필수 <span class="fw-bold">상품</span>을 제공하여 초기 <span class="fw-bold">비용</span>을 절감해 줍니다. <span class="fw-bold">렌트카 전문 업체</span>들은 <span class="fw-bold">네이버</span>, <span class="fw-bold">구글</span> 검색 광고나 <span class="fw-bold">유튜브</span> <span class="fw-bold">채널</span>을 통해 이러한 <span class="fw-bold">이벤트</span>를 적극적으로 홍보하고 있습니다.</p>
+            <p>하지만 <span class="fw-bold">내돈내산 후기</span>를 보면, <span class="fw-bold">사은품</span> <span class="fw-bold">상품</span>의 질이 떨어지는 경우가 있어 <span class="fw-bold">단점</span>으로 작용할 수 있습니다. <span class="fw-bold">현금 지원</span> <span class="fw-bold">혜택</span> 역시 <span class="fw-bold">업체</span>별로 <span class="fw-bold">비용</span> <span class="fw-bold">차이점</span>이 크므로, <span class="fw-bold">전문 업체</span> <span class="fw-bold">순위</span>를 <span class="fw-bold">비교</span>하고 <span class="fw-bold">견적</span>을 받아보는 것이 좋습니다. <span class="fw-bold">장기렌트카</span> <span class="fw-bold">가격비교</span>는 단순히 <span class="fw-bold">월 렌탈료</span> <span class="fw-bold">비교</span>를 넘어, <span class="fw-bold">총 예상 금액</span>과 <span class="fw-bold">혜택</span>의 <span class="fw-bold">장단점</span>을 종합적으로 고려해야 합니다. <span class="fw-bold">2026년</span>에는 <span class="fw-bold">신규 가입</span>자를 위한 더욱 파격적인 <span class="fw-bold">할인</span> <span class="fw-bold">이벤트</span>가 예상되므로, <span class="fw-bold">저렴한곳</span>을 찾기 위한 정보 수집이 필수적입니다.</p>
+
+            <h3><span class="fw-bold">단기렌트카</span> <span class="fw-bold">가격비교</span> 심층 분석: <span class="fw-bold">평균</span> <span class="fw-bold">가격</span> <span class="fw-bold">차이점</span>과 <span class="fw-bold">장단점</span></h3>
+            <p><span class="fw-bold">단기렌트카</span>는 <span class="fw-bold">장기렌트카</span>와 달리 <span class="fw-bold">가격</span>이 유동적입니다. 성수기(여름 휴가철, 명절)와 비수기 <span class="fw-bold">가격 차이점</span>이 크며, <span class="fw-bold">평균</span> <span class="fw-bold">가격</span> <span class="fw-bold">예상 금액</span>이 2배 이상 차이 나기도 합니다. <span class="fw-bold">단기렌트카</span>의 <span class="fw-bold">장점</span>은 원하는 기간만큼만 <span class="fw-bold">가입</span>하여 <span class="fw-bold">비용</span>을 지불한다는 점입니다. <span class="fw-bold">단점</span>으로는 <span class="fw-bold">보험 적용 범위</span>가 좁고, <span class="fw-bold">사고</span> 발생 시 면책금이 높아 예상치 못한 <span class="fw-bold">비용</span>이 발생할 수 있습니다. <span class="fw-bold">저렴한곳</span>을 찾으려면 <span class="fw-bold">렌트카 업체 순위</span>를 파악하여 <span class="fw-bold">비교</span>하고, 시즌별 <span class="fw-bold">할인</span> <span class="fw-bold">혜택</span>을 활용해야 합니다.</p>
+            <p><span class="fw-bold">내돈내산 후기</span>를 보면, <span class="fw-bold">제주도 렌트카</span>의 경우 <span class="fw-bold">비교</span> <span class="fw-bold">전문 업체</span>를 통해 <span class="fw-bold">가입</span>하는 것이 <span class="fw-bold">저렴한곳</span>을 찾는 데 유리합니다. <span class="fw-bold">렌트카 업체</span> <span class="fw-bold">순위</span>를 <span class="fw-bold">비교</span>하여 <span class="fw-bold">가격</span>이 <span class="fw-bold">저렴한곳</span>을 선택하되, <span class="fw-bold">보험</span> <span class="fw-bold">혜택</span>을 꼼꼼히 <span class="fw-bold">비교</span>해야 <span class="fw-bold">단점</span>을 줄일 수 있습니다. <span class="fw-bold">렌트카 전문 업체</span>들은 <span class="fw-bold">구글</span>이나 <span class="fw-bold">네이버</span> <span class="fw-bold">검색</span>을 통해 <span class="fw-bold">이벤트</span> <span class="fw-bold">상품</span>을 홍보하고 있으므로, <span class="fw-bold">트위터</span>나 <span class="fw-bold">인스타그램</span> <span class="fw-bold">페이스북</span> 등 SNS를 통해서도 정보를 얻을 수 있습니다.</p>
+
+            <h3><span class="fw-bold">장기렌트카</span> 모델별 <span class="fw-bold">가격비교</span> <span class="fw-bold">순위</span>와 <span class="fw-bold">추천</span> 모델</h3>
+            <p><span class="fw-bold">2026년</span> <span class="fw-bold">장기렌트카</span> 시장 <span class="fw-bold">순위</span>를 주도하는 모델은 <span class="fw-bold">현대 그랜저</span>, <span class="fw-bold">기아 쏘렌토</span>, <span class="fw-bold">현대 아반떼</span>, <span class="fw-bold">기아 카니발</span>입니다. 이들 모델은 <span class="fw-bold">가격</span> 대비 <span class="fw-bold">장점</span>이 뛰어나 많은 고객들에게 <span class="fw-bold">추천</span>됩니다. <span class="fw-bold">렌트카 업체</span> <span class="fw-bold">순위</span>가 높은 곳일수록 이들 모델에 대한 <span class="fw-bold">할인 혜택</span>과 <span class="fw-bold">현금 지원</span> <span class="fw-bold">이벤트</span>가 활발합니다. <span class="fw-bold">가격비교</span> <span class="fw-bold">전문 업체</span>를 통해 <span class="fw-bold">견적</span>을 받아 <span class="fw-bold">비교</span>해보면 <span class="fw-bold">저렴한곳</span>을 쉽게 찾을 수 있습니다.</p>
+            <p>특히 <span class="fw-bold">전기차</span> <span class="fw-bold">장기렌트카</span> <span class="fw-bold">가입</span>이 증가하면서 <span class="fw-bold">테슬라 모델Y</span>, <span class="fw-bold">현대 아이오닉 5</span>, <span class="fw-bold">기아 EV6</span> 등의 <span class="fw-bold">가격</span> <span class="fw-bold">비교</span> 수요가 높습니다. 전기차는 <span class="fw-bold">보조금</span> <span class="fw-bold">혜택</span>이 복잡하므로 <span class="fw-bold">전문 업체</span>의 <span class="fw-bold">상담</span>을 받아 <span class="fw-bold">가입</span>하는 것이 <span class="fw-bold">비용</span> 절감에 유리합니다. <span class="fw-bold">렌트카 가격비교</span>는 <span class="fw-bold">내돈내산 후기</span>를 참고하여 <span class="fw-bold">장단점</span>을 파악하고, <span class="fw-bold">전문 업체</span> <span class="fw-bold">순위</span>를 <span class="fw-bold">비교</span>하는 것이 중요합니다. <span class="fw-bold">2026년</span>에는 <span class="fw-bold">렌트카</span> <span class="fw-bold">시장</span>이 더욱 성장할 것으로 <span class="fw-bold">예상</span>되므로, <span class="fw-bold">가격비교</span> <span class="fw-bold">전문 업체</span>의 <span class="fw-bold">정보</span>를 활용하여 현명하게 <span class="fw-bold">가입</span>하세요.</p>
+        </div>
+    </section>
+
+  
